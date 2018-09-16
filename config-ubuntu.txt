@@ -1,0 +1,17 @@
+kernel=kernel8.img
+arm_64bit=1
+device_tree=bcm2710-rpi-3-b-plus.dtb
+framebuffer_depth=16
+
+start_x=1
+
+enable_uart=1
+core_freq=400
+
+hdmi_force_hotplug=1
+
+framebuffer_swap=1
+
+disable_overscan=1
+
+gpu_mem=64

@@ -1,0 +1,44 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          wifi
+# Required-Start:    
+# Required-Stop:
+# Should-Start:      
+# Default-Start:     2 3 4 5
+# Default-Stop:
+# X-Interactive:     
+# Short-Description: wifi
+### END INIT INFO
+
+PATH=/bin:/sbin:/usr/bin:/usr/sbin
+MODFILE=/lib/modules/brcmfmac.ko
+MODUTIL=/lib/modules/brcmutil.ko
+MODUTIL_NAME=brcmutil
+MODFILE_NAME=brcmfmac
+
+case $1 in
+	start)
+		if [ "$(lsmod | grep $MODFILE_NAME | wc -l)" != "0" ] || [ "$(lsmod | grep $MODFILE_NAME | wc -l)" != "0" ]; then
+			$0 stop
+		fi
+
+		insmod $MODUTIL
+		insmod $MODFILE
+		;;
+	stop)
+		rmmod $MODFILE_NAME 2>&1 > /dev/null
+		rmmod $MODUTIL_NAME 2>&1 > /dev/null
+		;;
+	restart|force-reload)
+		$0 stop
+		sleep 1
+		$0 start
+		;;
+	*)
+		echo not support command argument $1
+		exit 1
+		;;
+esac
+
+exit 0
